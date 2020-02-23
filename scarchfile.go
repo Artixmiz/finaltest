@@ -1,10 +1,19 @@
 package main
 
 import (
+	"io/ioutil"
 	"os"
 	"strings"
 	"sync"
+	"time"
 )
+
+type MyFile struct {
+	Path    string
+	Size    int64
+	Name    string
+	ModTime time.Time
+}
 
 func getDrives() (r []string) {
 	for _, drive := range "ABCDEFGHIJKLMNOPQRSTUVWXYZ" {
@@ -35,5 +44,24 @@ func ProcessingExtension(dir string, f os.FileInfo, extension map[string]string,
 		mf.Name = f.Name()
 		mf.ModTime = f.ModTime()
 		*files = append(*files, mf)
+	}
+}
+func FindFileFromExtension(extension map[string]string, dir string, files *[]MyFile, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fs, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return
+	}
+	for _, f := range fs {
+		var subWg sync.WaitGroup
+		subWg.Add(1)
+		if f.IsDir() {
+			path := dir + "/" + f.Name()
+			go FindFileFromExtension(extension, path, files, &subWg)
+
+		} else {
+			ProcessingExtension(dir, f, extension, files, &subWg)
+		}
+		subWg.Wait()
 	}
 }
