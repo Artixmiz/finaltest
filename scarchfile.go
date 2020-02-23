@@ -89,6 +89,11 @@ func main() {
 	extensionMap := make(map[string]string)
 	fmt.Print("extension file scarch \n input :")
 	fmt.Scan(&inputextension)
+	if inputextension = "txt"{
+		extensionMap["txt"] = ".txt"
+	}
+	extensionMap["jpg"] 
+	extensionMap["txt"] = inputextension
 	fmt.Print("select drive for scarch :")
 	fmt.Scan(&inputdrive)
 	drives := getDrives(inputdrive)
