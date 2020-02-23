@@ -73,7 +73,7 @@ func txtCreate(path string, sizes int64) {
 		return
 	}
 	file.WriteString(path)
-	file.WriteString(sizes)
+	file.WriteString(string(sizes))
 }
 
 func main() {
