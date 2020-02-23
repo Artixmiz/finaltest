@@ -68,13 +68,9 @@ func FindFileFromExtension(extension map[string]string, dir string, files *[]MyF
 }
 
 func txtCreate() {
-	file, err := os.Create("./TXT/1.txt")
+	file, err := os.Create("./output.txt")
 	if err != nil {
 		return
-	}
-	for x := 1; x <= 1000; x++ {
-		defer file.Close()
-		file.WriteString("Atiwan\nPhongam\n25\n")
 	}
 }
 
