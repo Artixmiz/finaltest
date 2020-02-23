@@ -103,7 +103,6 @@ func main() {
 	default:
 		panic("Error-Panic")
 	}
-	extensionMap["txt"] = inputextension
 	fmt.Print("select drive for scarch :")
 	fmt.Scan(&inputdrive)
 	drives := getDrives(inputdrive)
