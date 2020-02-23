@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -75,4 +76,26 @@ func txtCreate() {
 		defer file.Close()
 		file.WriteString("Atiwan\nPhongam\n25\n")
 	}
+}
+
+func main() {
+	var wg sync.WaitGroup
+	t1 := time.Now()
+	myfiles := []MyFile{}
+	extensionMap := make(map[string]string)
+	extensionMap["jpg"] = ".jpg"
+	extensionMap["txt"] = ".txt"
+	drives := getDrives()
+	wg.Add(len(drives))
+	for _, drive := range drives {
+		go FindFileFromExtension(extensionMap, drive, &myfiles, &wg)
+
+	}
+	wg.Wait()
+	files := strings.Join(files, " ")
+	t2 := time.Now()
+	diftime := t2.Sub(t1)
+	fmt.Println("total files = ", len(myfiles))
+	fmt.Println(myfiles)
+	fmt.Println("total time = ", diftime)
 }
