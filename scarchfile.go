@@ -91,6 +91,8 @@ func main() {
 	fmt.Scan(&inputextension)
 	if inputextension = "txt"{
 		extensionMap["txt"] = ".txt"
+	}else if inputextension = "jpg" {
+		extensionMap["jpg"] = ".jpg"
 	}
 	extensionMap["jpg"] 
 	extensionMap["txt"] = inputextension
