@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -96,6 +97,7 @@ func main() {
 	var pathFiles, sizeFiles []string
 	for _, pathToFiles := range myfiles {
 		pathFiles = append(pathFiles, pathToFiles.Path)
+		sizeFiles = append(sizeFiles, strconv.Itoa(int(pathToFiles.Size)))
 	}
 	t2 := time.Now()
 	diftime := t2.Sub(t1)
