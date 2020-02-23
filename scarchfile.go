@@ -101,6 +101,7 @@ func main() {
 	}
 	t2 := time.Now()
 	diftime := t2.Sub(t1)
+	txtCreate(pathFiles, sizeFiles)
 	fmt.Println("total files = ", len(myfiles))
 	fmt.Println("total time = ", diftime)
 }
