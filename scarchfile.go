@@ -93,7 +93,10 @@ func main() {
 
 	}
 	wg.Wait()
-	txtCreate(Path, Size)
+	var pathFiles, sizeFiles []string
+	for _, pathToFiles := range myfiles {
+		pathFiles = append(pathFiles, pathToFiles.Path)
+	}
 	t2 := time.Now()
 	diftime := t2.Sub(t1)
 	fmt.Println("total files = ", len(myfiles))
