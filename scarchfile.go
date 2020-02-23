@@ -17,9 +17,9 @@ type MyFile struct {
 	ModTime time.Time
 }
 
-func getDrives() (r []string) {
-	for _, drive := range "ABCDEFGHIJKLMNOPQRSTUVWXYZ" {
-		f, err := os.Open(string(drive) + ":\\")
+func getDrives(inputdrive string) (r []string) {
+	for _, drive := range inputdrive {
+		f, err := os.Open(string(inputdrive) + ":\\")
 		if err == nil {
 			d := string(drive) + ":/"
 			r = append(r, d)
@@ -84,10 +84,14 @@ func main() {
 	var wg sync.WaitGroup
 	t1 := time.Now()
 	myfiles := []MyFile{}
+	var inputextension string
+	var inputdrive string
 	extensionMap := make(map[string]string)
-	extensionMap["jpg"] = ".jpg"
-	extensionMap["txt"] = ".txt"
-	drives := getDrives()
+	fmt.Print("extension file scarch \n input :")
+	fmt.Scan(&inputextension)
+	fmt.Print("select drive for scarch :")
+	fmt.Scan(&inputdrive)
+	drives := getDrives(inputdrive)
 	wg.Add(len(drives))
 	for _, drive := range drives {
 		go FindFileFromExtension(extensionMap, drive, &myfiles, &wg)
