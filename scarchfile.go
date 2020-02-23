@@ -65,3 +65,14 @@ func FindFileFromExtension(extension map[string]string, dir string, files *[]MyF
 		subWg.Wait()
 	}
 }
+
+func txtCreate() {
+	file, err := os.Create("./TXT/1.txt")
+	if err != nil {
+		return
+	}
+	for x := 1; x <= 1000; x++ {
+		defer file.Close()
+		file.WriteString("Atiwan\nPhongam\n25\n")
+	}
+}
