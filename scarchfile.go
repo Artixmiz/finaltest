@@ -67,11 +67,13 @@ func FindFileFromExtension(extension map[string]string, dir string, files *[]MyF
 	}
 }
 
-func txtCreate() {
+func txtCreate(path string, sizes int64) {
 	file, err := os.Create("./output.txt")
 	if err != nil {
 		return
 	}
+	file.WriteString(path)
+	file.WriteString(sizes)
 }
 
 func main() {
