@@ -92,10 +92,8 @@ func main() {
 
 	}
 	wg.Wait()
-	files := strings.Join(files, " ")
 	t2 := time.Now()
 	diftime := t2.Sub(t1)
 	fmt.Println("total files = ", len(myfiles))
-	fmt.Println(myfiles)
 	fmt.Println("total time = ", diftime)
 }
